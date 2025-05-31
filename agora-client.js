@@ -4,6 +4,10 @@ let localAudioTrack;
 let remoteUsers = {};
 let isMuted = false;
 
+// Hardcoded App ID and token - replace these with your actual values
+const AGORA_APP_ID = "3983e52a08424b7da5e79be4c9dfae0f";
+const AGORA_TOKEN = "007eJxTYLhzPOLk7SmZplOsdSdNKj7I4bF0/r7XDsJin56Vrkz02s2lwGBsaWGcamqUaGBhYmSSZJ6SaJpqbpmUapJsmZKWmGqQdlPGKqMhkJFh30s1RkYGCATxeRmKSlOKEnVLUotLMvPSGRgAy6QkAA=="; // Use null if you're not using tokens
+
 // Initialize Agora client
 function initializeClient() {
     agoraClient = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
@@ -18,15 +22,15 @@ function initializeClient() {
 // Join channel function
 async function joinChannel() {
     try {
-        // Get input values
-        const appId = document.getElementById('appId').value.trim();
-        const token = document.getElementById('token').value.trim() || null;
+        // Use hardcoded App ID and token, only get channel name and UID from input
+        const appId = AGORA_APP_ID;
+        const token = AGORA_TOKEN;
         const channelName = document.getElementById('channelName').value.trim();
         const uid = document.getElementById('uid').value.trim() || null;
         
         // Validate required fields
-        if (!appId || !channelName) {
-            alert('Please fill in App ID and Channel Name');
+        if (!channelName) {
+            alert('Please fill in Channel Name');
             return;
         }
         
