@@ -1,12 +1,12 @@
 // Agora client configuration
-let agoraClient;
+let agoraClient;``
 let localAudioTrack;
 let remoteUsers = {};
 let isMuted = false;
 
 // Hardcoded App ID and token - replace these with your actual values
-const AGORA_APP_ID = "3983e52a08424b7da5e79be4c9dfae0f";
-const AGORA_TOKEN = "007eJxTYLhzPOLk7SmZplOsdSdNKj7I4bF0/r7XDsJin56Vrkz02s2lwGBsaWGcamqUaGBhYmSSZJ6SaJpqbpmUapJsmZKWmGqQdlPGKqMhkJFh30s1RkYGCATxeRmKSlOKEnVLUotLMvPSGRgAy6QkAA=="; // Use null if you're not using tokens
+const AGORA_APP_ID = "AOGRA_APP_ID"; // Replace with your Agora App ID
+const AGORA_TOKEN = "AGORA_TOKEN"; // Use null if you're not using tokens
 
 // Initialize Agora client
 function initializeClient() {
