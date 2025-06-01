@@ -4,192 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agora Voice Call</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #000000;
-        }
-        
-        .container {
-            background: rgb(0, 0, 0);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            color: #00ff00;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #00ff00;
-        }
-        
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #00ff00;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #111;
-            color: #00ff00;
-        }
-        
-        button {
-            background-color: #00aa00;
-            color: #000000;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px 5px;
-        }
-        
-        button:hover {
-            background-color: #00ff00;
-        }
-        
-        button:disabled {
-            background-color: #333;
-            color: #666;
-            cursor: not-allowed;
-        }
-        
-        .video-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .video-player {
-            width: 300px;
-            height: 200px;
-            background-color: #000;
-            border-radius: 10px;
-            position: relative;
-        }
-        
-        .video-player video {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-        
-        .audio-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #111;
-            border-radius: 10px;
-            border: 1px solid #00ff00;
-        }
-        
-        .audio-status {
-            text-align: center;
-        }
-        
-        .audio-status h3 {
-            margin-top: 0;
-            color: #00ff00;
-        }
-        
-        .audio-status div {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #00ff00;
-        }
-        
-        #muteBtn {
-            background-color: #00aa00;
-            margin-top: 15px;
-        }
-        
-        #muteBtn:hover {
-            background-color: #00dd00;
-        }
-        
-        #muteBtn.muted {
-            background-color: #aa0000;
-        }
-        
-        #muteBtn.muted:hover {
-            background-color: #dd0000;
-        }
-        
-        .status {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .status.connected {
-            background-color: #002200;
-            color: #00ff00;
-            border: 1px solid #00aa00;
-        }
-        
-        .status.disconnected {
-            background-color: #220000;
-            color: #ff0000;
-            border: 1px solid #aa0000;
-        }
-        
-        .status.connecting {
-            background-color: #222200;
-            color: #ffff00;
-            border: 1px solid #aaaa00;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Agora Voice Call Demo</h1>
         
-        <div class="form-group">
-            <label for="channelName">Channel Name:</label>
-            <input type="text" id="channelName" placeholder="Enter channel name">
-        </div>
-        
-        <div class="form-group">
-            <label for="uid">UID:</label>
-            <input type="text" id="uid" placeholder="Enter UID (or leave empty for auto-generation)">
-        </div>
-        
-        <button id="joinBtn" onclick="joinChannel()">Join Channel</button>
-        <button id="leaveBtn" onclick="leaveChannel()" disabled>Leave Channel</button>
-        
-        <div id="status" class="status disconnected">
-            Disconnected
-        </div>
-        
-        <div class="audio-container">
-            <div class="audio-status">
-                <h3>Audio Status</h3>
-                <div id="localAudioStatus">Local Audio: Off</div>
-                <div id="remoteAudioStatus">Remote Users: 0</div>
-                <div id="userList" style="margin-top: 15px; font-size: 14px; color: #00cc00;"></div>
-                <button id="muteBtn" onclick="toggleMute()" disabled>Mute</button>
+        <div class="main-layout">
+            <!-- Left Column: Controls and Inputs -->
+            <div class="left-column">
+                <div class="input-section">
+                    <h3>Connection Settings</h3>
+                    
+                    <div class="form-group">
+                        <label for="channelName">Channel Name:</label>
+                        <input type="text" id="channelName" placeholder="Enter channel name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="uid">UID:</label>
+                        <input type="text" id="uid" placeholder="Enter UID (or leave empty for auto-generation)">
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="joinBtn" onclick="joinChannel()">Join Channel</button>
+                        <button id="leaveBtn" onclick="leaveChannel()" disabled>Leave Channel</button>
+                        <button id="refreshBtn" onclick="refreshUserList()">🔄 Debug Refresh</button>
+                    </div>
+                    
+                    <div id="status" class="status disconnected">
+                        Disconnected
+                    </div>
+                </div>
+                
+                <div class="audio-container">
+                    <div class="audio-status">
+                        <h3>Audio Status</h3>
+                        <div id="localAudioStatus">Local Audio: Off</div>
+                        <div id="remoteAudioStatus">Remote Users: 0</div>
+                        <div id="userList"></div>
+                        <button id="muteBtn" onclick="toggleMute()" disabled>Mute</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Room Activity Log -->
+            <div class="right-column">
+                <div class="room-logs">
+                    <h3>Room Activity Log</h3>
+                    <div id="roomLogs"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Agora SDK -->
     <script src="https://download.agora.io/sdk/release/AgoraRTC_N-4.19.0.js"></script>
+    <!-- Environment Loader -->
+    <script src="env-loader.js"></script>
     <!-- Our custom script -->
     <script src="agora-client.js"></script>
 </body>

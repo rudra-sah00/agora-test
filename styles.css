@@ -1,0 +1,516 @@
+/* Agora Voice Call Demo - CSS Module */
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000000;
+    color: #00ff00;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    background: #000000;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Layout Styles */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-section {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Typography */
+h1 {
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+h3 {
+    margin-top: 0;
+    color: #00ff00;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #00ff00;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #111111;
+    color: #00ff00;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    background-color: #1a1a1a;
+}
+
+input[type="text"]::placeholder {
+    color: #666666;
+    font-style: italic;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #00aa00, #00ff00);
+    color: #000000;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #00ff00, #44ff44);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 255, 0, 0.3);
+}
+
+button:disabled {
+    background: #333333;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Mute Button Specific Styles */
+#muteBtn {
+    background: linear-gradient(135deg, #00aa00, #00dd00);
+    margin-top: 15px;
+}
+
+#muteBtn:hover {
+    background: linear-gradient(135deg, #00dd00, #44ff44);
+}
+
+#muteBtn.muted {
+    background: linear-gradient(135deg, #aa0000, #ff4444);
+    color: #ffffff;
+}
+
+#muteBtn.muted:hover {
+    background: linear-gradient(135deg, #dd0000, #ff6666);
+}
+
+/* Status Indicators */
+.status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.status.connected {
+    background: linear-gradient(135deg, #002200, #004400);
+    color: #00ff00;
+    border: 2px solid #00aa00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.status.disconnected {
+    background: linear-gradient(135deg, #220000, #440000);
+    color: #ff4444;
+    border: 2px solid #aa0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.status.connecting {
+    background: linear-gradient(135deg, #222200, #444400);
+    color: #ffff00;
+    border: 2px solid #aaaa00;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Audio Container */
+.audio-container {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #111111, #1a1a1a);
+    border-radius: 10px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.audio-status {
+    text-align: center;
+}
+
+.audio-status div {
+    margin: 12px 0;
+    font-size: 16px;
+    color: #00ff00;
+    padding: 8px;
+    background: rgba(0, 255, 0, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+/* Room Logs */
+.room-logs {
+    margin-top: 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #111111, #1a1a1a);
+    border-radius: 10px;
+    border: 2px solid #00ff00;
+    height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.room-logs::-webkit-scrollbar {
+    width: 8px;
+}
+
+.room-logs::-webkit-scrollbar-track {
+    background: #222222;
+    border-radius: 4px;
+}
+
+.room-logs::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+.room-logs::-webkit-scrollbar-thumb:hover {
+    background: #44ff44;
+}
+
+.room-logs h3 {
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+#roomLogs {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Log Entries */
+.log-entry {
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+    transition: all 0.2s ease;
+    border-radius: 3px;
+    margin: 2px 0;
+    padding-left: 8px;
+}
+
+.log-entry:hover {
+    background: rgba(0, 255, 0, 0.05);
+    padding-left: 12px;
+}
+
+/* Log Entry Types with Enhanced Styling */
+.log-info {
+    color: #00cc00;
+    border-left: 3px solid #00cc00;
+}
+
+.log-success {
+    color: #00ff00;
+    border-left: 3px solid #00ff00;
+    font-weight: bold;
+}
+
+.log-warning {
+    color: #ffaa00;
+    border-left: 3px solid #ffaa00;
+    background: rgba(255, 170, 0, 0.05);
+}
+
+.log-error {
+    color: #ff4444;
+    border-left: 3px solid #ff4444;
+    background: rgba(255, 68, 68, 0.05);
+    font-weight: bold;
+}
+
+.log-join {
+    color: #44ff44;
+    border-left: 3px solid #44ff44;
+    background: rgba(68, 255, 68, 0.05);
+}
+
+.log-leave {
+    color: #ff8844;
+    border-left: 3px solid #ff8844;
+    background: rgba(255, 136, 68, 0.05);
+}
+
+.log-publish {
+    color: #4488ff;
+    border-left: 3px solid #4488ff;
+    background: rgba(68, 136, 255, 0.05);
+}
+
+.log-unpublish {
+    color: #ff4488;
+    border-left: 3px solid #ff4488;
+    background: rgba(255, 68, 136, 0.05);
+}
+
+.log-audio {
+    color: #88ffff;
+    border-left: 3px solid #88ffff;
+    background: rgba(136, 255, 255, 0.05);
+}
+
+/* User List Styling */
+#userList {
+    margin-top: 15px !important;
+    font-size: 14px !important;
+    color: #00cc00 !important;
+    font-family: 'Courier New', Monaco, monospace;
+    background: rgba(0, 204, 0, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 204, 0, 0.3);
+}
+
+/* Video Container (for future use) */
+.video-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.video-player {
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(135deg, #000000, #111111);
+    border-radius: 10px;
+    position: relative;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.video-player video {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .button-group button {
+        margin: 5px 0;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 8px 3px;
+    }
+    
+    .audio-container,
+    .room-logs {
+        padding: 15px;
+    }
+    
+    .room-logs {
+        height: 300px;
+    }
+    
+    .video-player {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .button-group button {
+        margin: 5px 0;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .room-logs {
+        height: 250px;
+    }
+}
+
+/* Terminal-like animations */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.log-entry:last-child {
+    animation: typewriter 0.3s steps(40, end);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Glow effects for better cyberpunk aesthetic */
+.container {
+    position: relative;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00ff00, #44ff44, #00ff00);
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0.3;
+    filter: blur(5px);
+}
